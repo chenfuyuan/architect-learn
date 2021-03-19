@@ -46,7 +46,7 @@ public class CreateThread {
     public static class MyCall implements Callable<String>{
 
         @Override
-        public String call() throws Exception {
+        public String call() {
             System.out.println("实现Callable接口，进行线程创建");
             return "执行Callable线程成功";
         }
@@ -64,17 +64,16 @@ public class CreateThread {
         myRun.start();
 
         //3. 实现Callable接口
-        Callable callable;
-        FutureTask futureTask = new FutureTask<>(new MyCall());
+        FutureTask<String> futureTask = new FutureTask<>(new MyCall());
         Thread myCall = new Thread(futureTask);
         myCall.start();
         System.out.println(futureTask.get());
 
 
         //4. lambda表达式
-        Thread lambdaThread = new Thread(()->{
-            System.out.println("通过lambda表达式创建线程");
-        });
+        Thread lambdaThread = new Thread(()->
+            System.out.println("通过lambda表达式创建线程")
+        );
         lambdaThread.start();
 
         //5. 线程池
@@ -86,14 +85,14 @@ public class CreateThread {
                 new ThreadPoolExecutor.AbortPolicy());
 
         //直接执行
-        threadPool.execute(()->{
-            System.out.println("通过线程池execute方法进行线程创建");
-        });
+        threadPool.execute(()->
+            System.out.println("通过线程池execute方法进行线程创建")
+        );
 
         //提交线程
-        threadPool.submit(() -> {
-            System.out.println("线程池submit方法进行线程创建");
-        });
+        threadPool.submit(() ->
+            System.out.println("线程池submit方法进行线程创建")
+        );
 
         //提交实现Callable接口
         Future<String> future = threadPool.submit(new MyCall());
