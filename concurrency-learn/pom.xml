@@ -12,6 +12,13 @@
     <description>多线程与高并发学习</description>
     <artifactId>concurrency-learn</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
